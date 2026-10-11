@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard — Live Quran Learning</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="page-teacher">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="index.html" class="brand-link">
+          <span class="brand-icon" aria-hidden="true">☽</span>
+          <span class="brand-name">Live Quran Learning</span>
+        </a>
+      </div>
+      <div class="header-status">
+        <span id="conn-badge" class="status-badge status-disconnected" aria-live="polite">Disconnected</span>
+        <button id="btn-logout" class="btn btn-sm btn-outline" style="display:none">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="container">
+
+      <!-- ═══ LOGIN PANEL ═══ -->
+      <section id="login-panel" class="panel card" aria-label="Teacher login">
+        <h1 class="panel-title">Teacher Login</h1>
+        <p class="panel-subtitle">Enter your password to access the dashboard.</p>
+        <form id="login-form" autocomplete="off" novalidate>
+          <div class="form-group">
+            <label for="password-input" class="form-label">Password</label>
+            <input
+              type="password"
+              id="password-input"
+              class="form-input"
+              placeholder="Enter teacher password"
+              required
+              autocomplete="current-password"
+            />
+          </div>
+          <button type="submit" id="btn-login" class="btn btn-primary btn-full">
+            Sign In
+          </button>
+        </form>
+        <div id="login-error" class="alert alert-error" role="alert" hidden></div>
+      </section>
+
+      <!-- ═══ DASHBOARD PANEL ═══ -->
+      <section id="dashboard-panel" class="dashboard-grid" style="display:none" aria-label="Teacher dashboard">
+
+        <!-- Status bar -->
+        <div class="card status-bar" id="status-bar">
+          <div class="status-item">
+            <span class="status-label">Lesson</span>
+            <span id="lesson-status-badge" class="status-badge status-idle" aria-live="polite">Idle</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Surah</span>
+            <span id="dash-surah-name" class="status-value">—</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Ayah</span>
+            <span id="dash-ayah-number" class="status-value">—</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Word</span>
+            <span id="dash-word-index" class="status-value">—</span>
+          </div>
+        </div>
+
+        <!-- Alert area -->
+        <div id="dash-alert" class="alert" role="alert" hidden></div>
+
+        <!-- ─── Quran Selection ─── -->
+        <div class="card">
+          <h2 class="card-title">Quran Selection</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="surah-select" class="form-label">Surah</label>
+              <select id="surah-select" class="form-input form-select">
+                <!-- Populated by teacher.js -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ayah-select" class="form-label">Ayah</label>
+              <select id="ayah-select" class="form-input form-select">
+                <!-- Populated by teacher.js -->
+              </select>
+            </div>
+            <div class="form-group form-group-btn">
+              <label class="form-label">&nbsp;</label>
+              <button id="btn-load" class="btn btn-secondary btn-full">Load</button>
+            </div>
+          </div>
+          <div id="quran-loading" class="loading-msg" hidden>Loading Quran text…</div>
+          <div id="quran-error"   class="alert alert-error" role="alert" hidden></div>
+        </div>
+
+        <!-- ─── Lesson Controls ─── -->
+        <div class="card">
+          <h2 class="card-title">Lesson Controls</h2>
+          <div class="lesson-controls">
+            <button id="btn-start"  class="btn btn-success">▶ Start Lesson</button>
+            <button id="btn-pause"  class="btn btn-warning" disabled>⏸ Pause</button>
+            <button id="btn-resume" class="btn btn-secondary" disabled>▶ Resume</button>
+            <button id="btn-end"    class="btn btn-danger"   disabled>■ End Lesson</button>
+          </div>
+        </div>
+
+        <!-- ─── Word Navigation ─── -->
+        <div class="card">
+          <h2 class="card-title">Word Navigation</h2>
+          <div class="nav-controls">
+            <button id="btn-prev-word" class="btn btn-outline" disabled>◀ Prev Word</button>
+            <div class="current-word-display">
+              <span class="cwl-label">Current word</span>
+              <span id="current-word-arabic" class="cwl-arabic" dir="rtl" lang="ar">—</span>
+            </div>
+            <button id="btn-next-word" class="btn btn-outline" disabled>Next Word ▶</button>
+          </div>
+          <div class="nav-controls nav-ayah-row">
+            <button id="btn-prev-ayah" class="btn btn-sm btn-outline" disabled>◀ Prev Ayah</button>
+            <button id="btn-next-ayah" class="btn btn-sm btn-outline" disabled>Next Ayah ▶</button>
+          </div>
+        </div>
+
+        <!-- ─── Quran Text Display ─── -->
+        <div class="card quran-card">
+          <h2 class="card-title">Quran Text — <span id="quran-card-label">Select a Surah</span></h2>
+          <div id="quran-text-area" class="quran-text-area" dir="rtl" lang="ar" aria-live="polite">
+            <p class="quran-placeholder">Load a Surah to display the Quran text.</p>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="teacher.js"></script>
+</body>
+</html>

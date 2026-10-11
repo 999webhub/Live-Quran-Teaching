@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Reader — Live Quran Learning</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="page-student">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header student-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">☽</span>
+        <span class="brand-name">Live Quran Learning</span>
+      </div>
+      <span id="s-conn-badge" class="status-badge status-disconnected" aria-live="polite">Connecting…</span>
+    </div>
+  </header>
+
+  <main class="student-main">
+    <div class="container student-container">
+
+      <!-- ═══ LESSON INFO BAR ═══ -->
+      <div class="student-info-bar">
+        <div class="sib-item">
+          <span class="sib-label">Status</span>
+          <span id="s-lesson-status" class="status-badge status-idle" aria-live="polite">Waiting…</span>
+        </div>
+        <div class="sib-item">
+          <span class="sib-label">Surah</span>
+          <span id="s-surah-name" class="sib-value">—</span>
+        </div>
+        <div class="sib-item">
+          <span class="sib-label">Ayah</span>
+          <span id="s-ayah-number" class="sib-value">—</span>
+        </div>
+      </div>
+
+      <!-- ═══ WAITING SCREEN ═══ -->
+      <div id="s-waiting" class="waiting-screen">
+        <div class="waiting-icon" aria-hidden="true">📖</div>
+        <h2>Waiting for Lesson to Begin</h2>
+        <p>Your teacher will start the lesson shortly.<br />
+           Make sure you are connected to WhatsApp for the audio.</p>
+      </div>
+
+      <!-- ═══ PAUSED SCREEN ═══ -->
+      <div id="s-paused" class="waiting-screen" hidden>
+        <div class="waiting-icon" aria-hidden="true">⏸</div>
+        <h2>Lesson Paused</h2>
+        <p>Please wait — the teacher will resume shortly.</p>
+      </div>
+
+      <!-- ═══ ENDED SCREEN ═══ -->
+      <div id="s-ended" class="waiting-screen" hidden>
+        <div class="waiting-icon" aria-hidden="true">🤲</div>
+        <h2>Lesson Ended</h2>
+        <p>جَزَاكَ اللَّهُ خَيْرًا — May Allah reward you with goodness.</p>
+      </div>
+
+      <!-- ═══ QURAN DISPLAY ═══ -->
+      <div id="s-quran-wrap" class="student-quran-wrap" hidden>
+        <div id="s-loading" class="loading-msg" hidden>Loading Quran text…</div>
+        <div id="s-error"   class="alert alert-error" role="alert" hidden></div>
+        <div id="s-quran-text" class="quran-text-area student-quran-text" dir="rtl" lang="ar" aria-live="polite"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="student.js"></script>
+</body>
+</html>

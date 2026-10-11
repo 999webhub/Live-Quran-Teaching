@@ -1,0 +1,484 @@
+/* ═══════════════════════════════════════════════════════════════
+   Live Quran Learning — style.css
+   Design tokens, shared layout, components
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Custom Properties ────────────────────────────────────── */
+:root {
+  --color-emerald:      #0B4F37;
+  --color-emerald-dark: #083a28;
+  --color-emerald-light:#1a6b4a;
+  --color-gold:         #C6A43F;
+  --color-gold-light:   #e0c06a;
+  --color-ivory:        #F8F5EC;
+  --color-white:        #FFFFFF;
+  --color-text:         #1E2A24;
+  --color-text-muted:   #5a6b60;
+  --color-border:       #d4cfc0;
+  --color-success:      #2d7a4f;
+  --color-warning:      #b5860a;
+  --color-danger:       #c0392b;
+  --color-info:         #1a5e8a;
+
+  --font-sans:   'Inter', system-ui, sans-serif;
+  --font-arabic: 'Amiri', 'Scheherazade New', serif;
+
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:   0 4px 12px rgba(0,0,0,.10);
+  --shadow-lg:   0 8px 30px rgba(0,0,0,.12);
+
+  --transition:  0.2s ease;
+}
+
+/* ── 2. Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-ivory);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a { color: var(--color-emerald); text-decoration: none; }
+a:hover { text-decoration: underline; color: var(--color-emerald-light); }
+a:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; border-radius: 2px; }
+
+img { max-width: 100%; display: block; }
+
+/* ── 3. Layout ───────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.section { padding: 4rem 0; }
+
+/* ── 4. Header ───────────────────────────────────────────────── */
+.site-header {
+  background: var(--color-emerald);
+  color: var(--color-white);
+  padding: 0.85rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.brand-link { color: var(--color-white); display: flex; align-items: center; gap: 0.5rem; }
+.brand-link:hover { text-decoration: none; opacity: 0.85; }
+
+.brand-icon { font-size: 1.4rem; }
+.brand-name { font-weight: 600; font-size: 1.05rem; letter-spacing: .01em; color: var(--color-white); }
+
+.header-nav { display: flex; align-items: center; gap: 1rem; }
+.nav-link { color: rgba(255,255,255,.85); font-size: .9rem; font-weight: 500; }
+.nav-link:hover { color: #fff; text-decoration: none; }
+
+.header-status { display: flex; align-items: center; gap: 0.75rem; }
+
+/* ── 5. Buttons ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), opacity var(--transition);
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.btn:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+
+.btn-primary   { background: var(--color-gold); color: var(--color-emerald-dark); border-color: var(--color-gold); }
+.btn-primary:hover { background: var(--color-gold-light); border-color: var(--color-gold-light); }
+
+.btn-secondary { background: var(--color-emerald); color: #fff; border-color: var(--color-emerald); }
+.btn-secondary:hover { background: var(--color-emerald-light); border-color: var(--color-emerald-light); }
+
+.btn-outline   { background: transparent; color: var(--color-emerald); border-color: var(--color-emerald); }
+.btn-outline:hover { background: var(--color-emerald); color: #fff; }
+
+.btn-success   { background: var(--color-success); color: #fff; border-color: var(--color-success); }
+.btn-success:hover { filter: brightness(1.1); }
+
+.btn-warning   { background: var(--color-warning); color: #fff; border-color: var(--color-warning); }
+.btn-warning:hover { filter: brightness(1.1); }
+
+.btn-danger    { background: var(--color-danger); color: #fff; border-color: var(--color-danger); }
+.btn-danger:hover { filter: brightness(1.1); }
+
+.btn-sm   { padding: 0.35rem 0.85rem; font-size: 0.8rem; }
+.btn-lg   { padding: 0.75rem 2rem;    font-size: 1rem; }
+.btn-full { width: 100%; }
+
+/* ── 6. Cards ────────────────────────────────────────────────── */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+}
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-emerald);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── 7. Alerts ───────────────────────────────────────────────── */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  border-left: 4px solid;
+  margin-top: 0.75rem;
+}
+.alert-error   { background: #fdf2f2; border-color: var(--color-danger);  color: var(--color-danger); }
+.alert-success { background: #f0faf4; border-color: var(--color-success); color: var(--color-success); }
+.alert-info    { background: #eff6ff; border-color: var(--color-info);    color: var(--color-info); }
+
+/* ── 8. Status Badges ────────────────────────────────────────── */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.status-connected    { background: #d4edda; color: #1b5e33; }
+.status-disconnected { background: #f8d7da; color: #721c24; }
+.status-idle         { background: #e2e3e5; color: #383d41; }
+.status-active       { background: #d4edda; color: #1b5e33; }
+.status-paused       { background: #fff3cd; color: #856404; }
+.status-ended        { background: #e2e3e5; color: #383d41; }
+
+/* ── 9. Forms ────────────────────────────────────────────────── */
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-label { font-size: 0.85rem; font-weight: 500; color: var(--color-text-muted); }
+.form-input {
+  padding: 0.55rem 0.85rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: var(--color-white);
+  transition: border-color var(--transition);
+  width: 100%;
+}
+.form-input:focus { outline: none; border-color: var(--color-emerald); }
+.form-select { appearance: auto; cursor: pointer; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 0.75rem;
+  align-items: end;
+}
+.form-group-btn { min-width: 90px; }
+
+@media (max-width: 560px) {
+  .form-row { grid-template-columns: 1fr 1fr; }
+  .form-group-btn { grid-column: 1 / -1; }
+}
+
+/* ── 10. Loading ─────────────────────────────────────────────── */
+.loading-msg {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  padding: 0.5rem 0;
+  font-style: italic;
+}
+
+/* ── 11. Arabic / Quran Text ─────────────────────────────────── */
+.quran-text-area {
+  font-family: var(--font-arabic);
+  font-size: 1.65rem;
+  line-height: 2.6;
+  direction: rtl;
+  text-align: justify;
+  color: var(--color-text);
+  padding: 1rem 0.5rem;
+  word-spacing: 0.15em;
+  overflow-wrap: break-word;
+}
+
+.quran-ayah {
+  display: inline;   /* words & markers flow inline */
+}
+
+.quran-word {
+  display: inline;
+  cursor: default;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.15s;
+}
+
+/* ── THE KEY FEATURE: underline active word ── */
+.current-word {
+  border-bottom: 3px solid var(--color-gold) !important;
+  color: var(--color-emerald-dark);
+  font-weight: 700;
+}
+
+.quran-verse-marker {
+  display: inline-block;
+  font-size: 1rem;
+  color: var(--color-gold);
+  margin: 0 0.4rem;
+  font-family: var(--font-sans);
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.quran-placeholder {
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* ── 12. Home Page ───────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--color-emerald-dark) 0%, var(--color-emerald) 100%);
+  color: var(--color-white);
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+.hero-inner { max-width: 680px; margin: 0 auto; }
+.hero-badge {
+  font-family: var(--font-arabic);
+  font-size: 1.5rem;
+  color: var(--color-gold-light);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.03em;
+  direction: rtl;
+}
+.hero-title  { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
+.hero-subtitle { font-size: 1.05rem; opacity: 0.88; margin-bottom: 2.25rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-emerald-dark);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+.step-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+.step-number {
+  font-family: var(--font-arabic);
+  font-size: 2.5rem;
+  color: var(--color-gold);
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+.step-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--color-emerald); margin-bottom: 0.5rem; }
+.step-card p  { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.65; }
+
+.info-card {
+  background: var(--color-emerald);
+  color: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: 2rem 2.5rem;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.info-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.75rem; }
+.info-card p  { font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.5rem; opacity: 0.9; }
+
+.cta-inner { text-align: center; }
+.cta-inner h2 { font-size: 1.75rem; font-weight: 700; color: var(--color-emerald-dark); margin-bottom: 0.5rem; }
+.cta-inner p  { color: var(--color-text-muted); margin-bottom: 1.75rem; }
+
+/* ── 13. Footer ──────────────────────────────────────────────── */
+.site-footer {
+  background: var(--color-emerald-dark);
+  color: rgba(255,255,255,.75);
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.8rem;
+  margin-top: auto;
+}
+.site-footer a { color: var(--color-gold-light); }
+.footer-small  { margin-top: 0.5rem; opacity: 0.6; }
+
+/* ── 14. Teacher Dashboard ───────────────────────────────────── */
+.page-teacher { background: #f0ede5; }
+
+.dashboard-main { padding: 2rem 0 3rem; }
+
+#login-panel {
+  max-width: 420px;
+  margin: 4rem auto 0;
+}
+.panel-title    { font-size: 1.4rem; font-weight: 700; color: var(--color-emerald-dark); margin-bottom: 0.4rem; }
+.panel-subtitle { font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 1.5rem; }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+.status-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.status-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-muted); }
+.status-value { font-size: 0.95rem; font-weight: 600; color: var(--color-emerald-dark); }
+
+.lesson-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.nav-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.nav-ayah-row { justify-content: flex-start; }
+
+.current-word-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+}
+.cwl-label  { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-muted); }
+.cwl-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.8rem;
+  color: var(--color-emerald-dark);
+  border-bottom: 3px solid var(--color-gold);
+  padding-bottom: 0.15rem;
+  min-width: 60px;
+  min-height: 2.5rem;
+}
+
+.quran-card { grid-column: 1 / -1; }
+
+/* ── 15. Student Reader ──────────────────────────────────────── */
+.page-student { background: var(--color-ivory); }
+
+.student-header { background: var(--color-emerald-dark); }
+
+.student-main { padding: 0 0 2rem; }
+.student-container { max-width: 700px; padding-top: 0; }
+
+.student-info-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 54px;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+.sib-item  { display: flex; flex-direction: column; gap: 0.15rem; }
+.sib-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-muted); }
+.sib-value { font-size: 0.9rem; font-weight: 600; color: var(--color-emerald-dark); }
+
+.waiting-screen {
+  text-align: center;
+  padding: 4rem 1.5rem;
+}
+.waiting-icon { font-size: 3rem; margin-bottom: 1rem; }
+.waiting-screen h2 { font-size: 1.35rem; font-weight: 700; color: var(--color-emerald-dark); margin-bottom: 0.75rem; }
+.waiting-screen p  { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.7; }
+
+.student-quran-wrap { padding: 1rem 0; }
+
+.student-quran-text {
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  line-height: 3;
+  padding: 1rem 0.75rem;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  min-height: 200px;
+}
+
+/* ── 16. Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .lesson-controls  { flex-direction: column; }
+  .lesson-controls .btn { width: 100%; }
+  .nav-controls     { flex-direction: column; align-items: stretch; }
+  .nav-controls .btn { width: 100%; }
+  .current-word-display { order: -1; }
+  .cwl-arabic { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 3rem 0; }
+  .quran-text-area { font-size: 1.35rem; line-height: 2.4; }
+  .student-quran-text { font-size: 1.35rem; line-height: 2.5; }
+}
+
+/* ── 17. Utility ─────────────────────────────────────────────── */
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
